@@ -5,6 +5,7 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  workflow_dispatch:   # optional manual trigger
 
 jobs:
   build:
@@ -20,10 +21,22 @@ jobs:
         dotnet-version: '10.0.203'
 
     - name: Restore dependencies
-      run: dotnet restore TezHealth.sln
+      run: |
+        dotnet restore src/API/TezHealth.API.csproj
+        dotnet restore src/Application/TezHealth.Application.csproj
+        dotnet restore src/Infrastructure/TezHealth.Infrastructure.csproj
+        dotnet restore src/Domain/TezHealth.Domain.csproj
 
     - name: Build
-      run: dotnet build TezHealth.sln --no-restore --configuration Release
+      run: |
+        dotnet build src/API/TezHealth.API.csproj --no-restore --configuration Release
+        dotnet build src/Application/TezHealth.Application.csproj --no-restore --configuration Release
+        dotnet build src/Infrastructure/TezHealth.Infrastructure.csproj --no-restore --configuration Release
+        dotnet build src/Domain/TezHealth.Domain.csproj --no-restore --configuration Release
 
     - name: Run tests
-      run: dotnet test TezHealth.sln --no-build --verbosity normal
+      run: |
+        dotnet test src/API/TezHealth.API.csproj --no-build --verbosity normal
+        dotnet test src/Application/TezHealth.Application.csproj --no-build --verbosity normal
+        dotnet test src/Infrastructure/TezHealth.Infrastructure.csproj --no-build --verbosity normal
+        dotnet test src/Domain/TezHealth.Domain.csproj --no-build --verbosity normal
