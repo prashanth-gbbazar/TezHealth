@@ -5,7 +5,7 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-  workflow_dispatch:   # optional manual trigger
+  workflow_dispatch:   # manual trigger option
 
 jobs:
   build:
@@ -13,30 +13,30 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4   # latest version, Node 24 compatible
+      uses: actions/checkout@v4
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4   # latest version, Node 24 compatible
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '10.0.203'
 
     - name: Restore dependencies
       run: |
-        dotnet restore src/API/TezHealth.API.csproj
+        dotnet restore src/Api/TezHealth.Api.csproj
         dotnet restore src/Application/TezHealth.Application.csproj
         dotnet restore src/Infrastructure/TezHealth.Infrastructure.csproj
         dotnet restore src/Domain/TezHealth.Domain.csproj
 
     - name: Build
       run: |
-        dotnet build src/API/TezHealth.API.csproj --no-restore --configuration Release
+        dotnet build src/Api/TezHealth.Api.csproj --no-restore --configuration Release
         dotnet build src/Application/TezHealth.Application.csproj --no-restore --configuration Release
         dotnet build src/Infrastructure/TezHealth.Infrastructure.csproj --no-restore --configuration Release
         dotnet build src/Domain/TezHealth.Domain.csproj --no-restore --configuration Release
 
     - name: Run tests
       run: |
-        dotnet test src/API/TezHealth.API.csproj --no-build --verbosity normal
+        dotnet test src/Api/TezHealth.Api.csproj --no-build --verbosity normal
         dotnet test src/Application/TezHealth.Application.csproj --no-build --verbosity normal
         dotnet test src/Infrastructure/TezHealth.Infrastructure.csproj --no-build --verbosity normal
         dotnet test src/Domain/TezHealth.Domain.csproj --no-build --verbosity normal
