@@ -18,10 +18,6 @@ public static class ServiceCollectionExtensions
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
-        // Add Product Services
-        services.AddScoped<IProductRepository, ProductRepository>();
-        services.AddScoped<IProductService, ProductService>();
-
         // Add Drug Services
         services.AddScoped<IDrugRepository, DrugRepository>();
         services.AddScoped<IDrugService, DrugService>();

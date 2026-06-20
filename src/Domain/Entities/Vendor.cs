@@ -1,7 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace TezHealth.Domain.Entities;
 
+[Table("vendors")]
 public class Vendor : Common.BaseEntity
 {
+    [Key]
     public Guid VendorId { get; set; } = Guid.NewGuid();
     public string VendorName { get; set; } = string.Empty;
     public string? ContactPerson { get; set; }

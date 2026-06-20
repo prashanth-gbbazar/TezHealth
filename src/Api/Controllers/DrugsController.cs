@@ -136,7 +136,7 @@ public class DrugsController : ControllerBase
         var createdDrug = await _drugService.CreateDrugAsync(drugDto);
         return CreatedAtAction(
             nameof(GetDrugById),
-            new { id = createdDrug.Id },
+            new { drugid = createdDrug.DrugId },
             new ApiResponse<DrugDto>(
                 createdDrug,
                 "Drug created successfully",

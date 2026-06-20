@@ -1,7 +1,12 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace TezHealth.Domain.Entities;
 
+[Table("drugs")]
 public class Drug : Common.BaseEntity
 {
+    [Key]
     public Guid DrugId { get; set; } = Guid.NewGuid();
     public Guid CategoryId { get; set; }
     public Guid? ManufacturerId { get; set; }

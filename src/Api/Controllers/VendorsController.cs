@@ -231,7 +231,7 @@ public class VendorsController : ControllerBase
         var createdVendor = await _vendorService.CreateVendorAsync(vendorDto);
         return CreatedAtAction(
             nameof(GetVendorById),
-            new { id = createdVendor.Id },
+            new { vendorid = createdVendor.VendorId },
             new ApiResponse<VendorDto>(
                 createdVendor,
                 "Vendor created successfully",

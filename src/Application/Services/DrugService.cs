@@ -145,7 +145,6 @@ public class DrugService : IDrugService
     {
         return new DrugDto
         {
-            Id = drug.Id,
             DrugId = drug.DrugId,
             CategoryId = drug.CategoryId,
             ManufacturerId = drug.ManufacturerId,
@@ -156,8 +155,7 @@ public class DrugService : IDrugService
             MinimumStockThreshold = drug.MinimumStockThreshold,
             StorageCondition = drug.StorageCondition,
             Status = drug.Status,
-            CreatedAt = drug.CreatedAt,
-            UpdatedAt = drug.UpdatedAt
+            CreatedAt = drug.CreatedAt
         };
     }
 }

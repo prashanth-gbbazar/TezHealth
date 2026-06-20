@@ -216,7 +216,6 @@ public class VendorService : IVendorService
     {
         return new VendorDto
         {
-            Id = vendor.Id,
             VendorId = vendor.VendorId,
             VendorName = vendor.VendorName,
             ContactPerson = vendor.ContactPerson,
@@ -230,8 +229,7 @@ public class VendorService : IVendorService
             DrugLicenseNumber = vendor.DrugLicenseNumber,
             PaymentTerms = vendor.PaymentTerms,
             Status = vendor.Status,
-            CreatedAt = vendor.CreatedAt,
-            UpdatedAt = vendor.UpdatedAt
+            CreatedAt = vendor.CreatedAt
         };
     }
 }

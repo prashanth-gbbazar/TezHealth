@@ -2,7 +2,6 @@ namespace TezHealth.Application.DTOs;
 
 public class VendorDto
 {
-    public int Id { get; set; }
     public Guid VendorId { get; set; }
     public string VendorName { get; set; } = string.Empty;
     public string? ContactPerson { get; set; }
@@ -17,5 +16,4 @@ public class VendorDto
     public string? PaymentTerms { get; set; }
     public bool? Status { get; set; }
     public DateTime CreatedAt { get; set; }
-    public DateTime? UpdatedAt { get; set; }
 }

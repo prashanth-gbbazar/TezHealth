@@ -10,7 +10,6 @@ public class ApplicationDbContext : DbContext
     {
     }
 
-    public DbSet<Product> Products { get; set; } = null!;
     public DbSet<Drug> Drugs { get; set; } = null!;
     public DbSet<Vendor> Vendors { get; set; } = null!;
 
@@ -18,18 +17,9 @@ public class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Product>(entity =>
-        {
-            entity.HasKey(e => e.Id);
-            entity.Property(e => e.Name).IsRequired().HasMaxLength(200);
-            entity.Property(e => e.Description).HasMaxLength(1000);
-            entity.Property(e => e.Price).HasPrecision(10, 2);
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
-        });
-
         modelBuilder.Entity<Drug>(entity =>
         {
-            entity.HasKey(e => e.Id);
+            entity.HasKey(e => e.DrugId);
             entity.Property(e => e.DrugId).IsRequired().HasDefaultValueSql("gen_random_uuid()");
             entity.Property(e => e.CategoryId).IsRequired();
             entity.Property(e => e.DrugName).IsRequired().HasMaxLength(255);
@@ -44,7 +34,7 @@ public class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<Vendor>(entity =>
         {
-            entity.HasKey(e => e.Id);
+            entity.HasKey(e => e.VendorId);
             entity.Property(e => e.VendorId).IsRequired().HasDefaultValueSql("gen_random_uuid()");
             entity.Property(e => e.VendorName).IsRequired().HasMaxLength(255);
             entity.Property(e => e.ContactPerson).HasMaxLength(255);
