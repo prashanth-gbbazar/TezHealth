@@ -1,12 +1,15 @@
-name: CI Test
+name: CI/CD Pipeline
 
 on:
   push:
+    branches: [ "main" ]
+  pull_request:
     branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -14,7 +17,13 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '10.0.203'
+        dotnet-version: '10.0.203'   # matches your SDK
+
+    - name: Restore dependencies
+      run: dotnet restore TezHealth.sln
 
     - name: Build
-      run: dotnet build TezHealth.sln --configuration Release
+      run: dotnet build TezHealth.sln --no-restore --configuration Release
+
+    - name: Run tests
+      run: dotnet test TezHealth.sln --no-build --verbosity normal
